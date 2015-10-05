@@ -13,7 +13,7 @@ Copy the script to `~/.weechat/python/autoload`
 
 ```sh
 mkdir -p ~/.weechat/python/autoload
-wget https://raw.githubusercontent.com/kattrali/weemoji/master/weemoji.py
+wget https://raw.githubusercontent.com/keith/urlview-weechat/master/urlview.py
 ```
 
 This is a python rewrite of [this ruby
