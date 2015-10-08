@@ -19,6 +19,8 @@ def urlview(data, buf, args):
     while weechat.infolist_next(infolist) == 1:
         lines.append(weechat.infolist_string(infolist, "message"))
 
+    weechat.infolist_free(infolist)
+
     if not lines:
         weechat.prnt(buf, "No URLs found")
         return weechat.WEECHAT_RC_OK
