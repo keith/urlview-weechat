@@ -5,6 +5,7 @@
 #
 # History:
 # 10-04-2015
+# Version 1.0.1: Reverse text passed to urlview
 # Version 1.0.0: initial release
 
 import distutils.spawn
@@ -25,7 +26,7 @@ def urlview(data, buf, args):
         weechat.prnt(buf, "No URLs found")
         return weechat.WEECHAT_RC_OK
 
-    text = "\n".join(lines)
+    text = "\n".join(reversed(lines))
     response = os.system("echo %s | urlview" % pipes.quote(text))
     if response != 0:
         weechat.prnt(buf, "No URLs found")
