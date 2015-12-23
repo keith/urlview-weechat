@@ -5,8 +5,9 @@
 #
 # History:
 # 10-04-2015
-# Version 1.0.1: Reverse text passed to urlview
 # Version 1.0.0: initial release
+# Version 1.0.1: reverse text passed to urlview
+# Version 1.0.2: remove weechat color from messages
 
 import distutils.spawn
 import os
@@ -18,7 +19,12 @@ def urlview(data, buf, args):
     infolist = weechat.infolist_get("buffer_lines", buf, "")
     lines = []
     while weechat.infolist_next(infolist) == 1:
-        lines.append(weechat.infolist_string(infolist, "message"))
+        lines.append(
+            weechat.string_remove_color(
+                weechat.infolist_string(infolist, "message"),
+                ""
+            )
+        )
 
     weechat.infolist_free(infolist)
 
@@ -40,7 +46,7 @@ def main():
     if distutils.spawn.find_executable("urlview") is None:
         return weechat.WEECHAT_RC_ERROR
 
-    if not weechat.register("urlview", "Keith Smiley", "1.0.0", "MIT",
+    if not weechat.register("urlview", "Keith Smiley", "1.0.2", "MIT",
                             "Use urlview on the current buffer", "", ""):
         return weechat.WEECHAT_RC_ERROR
 
