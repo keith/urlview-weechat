@@ -32,8 +32,12 @@ def urlview(data, buf, args):
         weechat.prnt(buf, "No URLs found")
         return weechat.WEECHAT_RC_OK
 
+    if not weechat.config_is_set_plugin("command"):
+        weechat.config_set_plugin("command", "urlview")
+    command = weechat.config_get_plugin("command")
+
     text = "\n".join(reversed(lines))
-    response = os.system("echo %s | urlview" % pipes.quote(text))
+    response = os.system("echo %s | %s" % (pipes.quote(text), command))
     if response != 0:
         weechat.prnt(buf, "No URLs found")
 
